@@ -8,11 +8,12 @@ from __future__ import (
     absolute_import, division, print_function, unicode_literals
 )
 
+from .opc.constants import RELATIONSHIP_TYPE as RT
 from .blkcntnr import BlockItemContainer
 from .enum.section import WD_SECTION
 from .enum.text import WD_BREAK
 from .section import Section, Sections
-from .shared import ElementProxy, Emu
+from .shared import ElementProxy, Emu, lazyproperty
 
 
 class Document(ElementProxy):
@@ -186,6 +187,20 @@ class Document(ElementProxy):
         if self.__body is None:
             self.__body = _Body(self._element.body, self)
         return self.__body
+
+    @property
+    def endnotes_part(self):
+        return self._notes_part(RT.ENDNOTES)
+
+    @property
+    def footnotes_part(self):
+        return self._notes_part(RT.FOOTNOTES)
+
+    def _notes_part(self, rel_type):
+        try:
+            return self._part.part_related_by(rel_type)
+        except KeyError:
+            pass
 
 
 class _Body(BlockItemContainer):

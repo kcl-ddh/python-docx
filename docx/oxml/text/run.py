@@ -103,6 +103,14 @@ class CT_R(BaseOxmlElement):
         self.clear_content()
         _RunContentAppender.append_to_run_from_text(self, text)
 
+    @property
+    def endnote_refs(self):
+        return self.findall(qn('w:endnoteReference'))
+
+    @property
+    def footnote_refs(self):
+        return self.findall(qn('w:footnoteReference'))
+
 
 class CT_Text(BaseOxmlElement):
     """
