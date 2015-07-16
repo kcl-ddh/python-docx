@@ -45,5 +45,4 @@ class Note(object):
 
     @property
     def paragraphs(self):
-        return [Paragraph(
-            p, self._element) for p in self._element.findall(qn('w:p'))]
+        return [Paragraph(p, self) for p in self._element.findall(qn('w:p'))]
