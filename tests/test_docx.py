@@ -22,48 +22,48 @@ DOC = api.Document(os.path.join(
 def test_parts():
     assert_equals(type(DOC.endnotes_part), NotesPart)
     assert_equals(type(DOC.footnotes_part), NotesPart)
-    
+
 
 def test_notes():
     part = DOC.endnotes_part
     assert_equals(type(part.notes), list)
     assert_equals(len(part.notes), 5)
-    
+
 
 def test_footnotes():
     part = DOC.footnotes_part
     assert_equals(type(part.notes), list)
     assert_equals(len(part.notes), 3)
-    
+
 
 def test_get_endnote():
-    note = DOC.endnotes_part.get_note('0')
+    note = DOC.endnotes_part.get_note(0)
     assert_true(type(note), Note)
-    
-    
+
+
 def test_get_footnote():
-    note = DOC.footnotes_part.get_note('0')
+    note = DOC.footnotes_part.get_note(0)
     assert_true(type(note), Note)
-    
-    
+
+
 def test_endnote():
-    note = DOC.endnotes_part.get_note('3')
-    assert_equals(note.id, '3')
+    note = DOC.endnotes_part.get_note(3)
+    assert_equals(note.id, 3)
     assert_is_none(note.type)
     note_paragraphs = note.paragraphs
     assert_equals(type(note_paragraphs), list)
     assert_equals(len(note_paragraphs), 2)
-    
+
 
 def test_footnote():
-    note = DOC.footnotes_part.get_note('2')
-    assert_equals(note.id, '2')
+    note = DOC.footnotes_part.get_note(2)
+    assert_equals(note.id, 2)
     assert_is_none(note.type)
     note_paragraphs = note.paragraphs
     assert_equals(type(note_paragraphs), list)
     assert_equals(len(note_paragraphs), 1)
-    
-    
+
+
 def test_style_iterator():
     assert_equals(
         [
@@ -83,7 +83,7 @@ def test_style_iterator():
         ],
         [(s.style_id, s.type, s.name) for s in DOC.styles]
     )
-    
+
 
 def test_endnoterefs():
     run = DOC.paragraphs[2].runs[1]
@@ -111,3 +111,9 @@ def test_footnoterefs():
     assert_equals(len(footnoterefs), 1)
     assert_equals(type(footnoterefs[0]), FootnoteReference)
     assert_equals(footnoterefs[0].id, _footnoteref.id)
+
+
+def test_get_footnote_content():
+    for note in DOC.footnotes_part.notes:
+        for p in note.paragraphs:
+            assert_is_not_none(p.text)

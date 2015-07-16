@@ -17,7 +17,7 @@ class CT_Footnotes(CT_Notes):
     _notes_tag = qn('w:footnote')
 
 
-class CT_Note(BaseOxmlElement):
+class CT_FtnEdn(BaseOxmlElement):
 
     @property
     def type(self):
@@ -32,16 +32,16 @@ class CT_Note(BaseOxmlElement):
         return self.findall(qn('w:p'))
 
 
-class CT_NoteReference(BaseOxmlElement):
+class CT_FtnEdnRef(BaseOxmlElement):
 
     @property
     def id(self):
         return int(self.attrib.get(qn('w:id')))
 
 
-class CT_EndnoteReference(CT_NoteReference):
+class CT_EndnoteReference(CT_FtnEdnRef):
     pass
 
 
-class CT_FootnoteReference(CT_NoteReference):
+class CT_FootnoteReference(CT_FtnEdnRef):
     pass

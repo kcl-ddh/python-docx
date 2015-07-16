@@ -197,12 +197,12 @@ register_element_cls('w:r',  CT_R)
 register_element_cls('w:t',  CT_Text)
 
 from .notes import (
-    CT_Endnotes, CT_Footnotes, CT_Note, CT_EndnoteReference,
+    CT_Endnotes, CT_Footnotes, CT_FtnEdn, CT_EndnoteReference,
     CT_FootnoteReference
 )
 register_element_cls('w:endnotes', CT_Endnotes)
-register_element_cls('w:endnote', CT_Note)
+register_element_cls('w:endnote', CT_FtnEdn)
 register_element_cls('w:footnotes', CT_Footnotes)
-register_element_cls('w:footnote', CT_Note)
+register_element_cls('w:footnote', CT_FtnEdn)
 register_element_cls('w:endnoteReference', CT_EndnoteReference)
 register_element_cls('w:footnoteReference', CT_FootnoteReference)
