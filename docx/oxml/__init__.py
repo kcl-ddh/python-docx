@@ -7,6 +7,7 @@ corresponding to Open XML elements.
 
 from __future__ import absolute_import
 
+import re
 from lxml import etree
 
 from .ns import NamespacePrefixedTag, nsmap
@@ -18,6 +19,12 @@ oxml_parser = etree.XMLParser(remove_blank_text=True)
 oxml_parser.set_element_class_lookup(element_class_lookup)
 
 
+def remove_hyperlink_tags(xml):
+    xml = xml.replace("</w:hyperlink>","")
+    xml = re.sub('<w:hyperlink[^>]*>',"",xml)
+    return xml
+    
+    
 def parse_xml(xml):
     """
     Return root lxml element obtained by parsing XML character string in
@@ -25,7 +32,7 @@ def parse_xml(xml):
     parser is used, so custom element classes are produced for elements in
     *xml* that have them.
     """
-    root_element = etree.fromstring(xml, oxml_parser)
+    root_element = etree.fromstring(remove_hyperlink_tags(xml), oxml_parser)
     return root_element
 
 
