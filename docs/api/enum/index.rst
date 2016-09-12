@@ -12,10 +12,13 @@ can be found here:
    MsoThemeColorIndex
    WdAlignParagraph
    WdBuiltinStyle
+   WdColorIndex
    WdLineSpacing
    WdOrientation
+   WdRowAlignment
    WdSectionStart
    WdStyleType
-   WdRowAlignment
+   WdTabAlignment
+   WdTabLeader
    WdTableDirection
    WdUnderline
