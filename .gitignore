@@ -1,4 +1,7 @@
 .coverage
+.project
+.pydevproject
+.settings
 /dist/
 /docs/.build/
 /*.egg-info
